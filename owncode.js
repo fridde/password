@@ -1,5 +1,3 @@
-var salt = 'a12b3c4d5e_change_me';
-
 var user = document.getElementById("user");
 var domain = document.getElementById("domain");
 var master = document.getElementById("master");
