@@ -4,13 +4,13 @@ With this password builder you can create and recreate passwords in a determinis
 
 ## Installation and setup
 1. Clone or download this repo onto your local machine.
-1. Copy the file ```salt_example.js``` and call the new file ```salt.js```.
-1. Open the file ```salt.js``` and edit the salt to some random, long string.
-1. Run ````builder``` in your console, probably by using ```sh builder```.
-1. Place the newly build file ````password.html``` anywhere you need to access your passwords:
-  - mobile phone
-  - desktop
-  - dropbox, etc
+1. Copy the file ```config_example.js``` and rename the new file to ```config.js```.
+1. Open the file ```config.js``` and edit the values to your liking.
+1. Run ```builder``` in your console, probably by using ```sh builder``` .
+1. Place the newly build file ```password.html``` anywhere you need to access your passwords:
+    - mobile phone
+    - desktop
+    - dropbox, etc
   
 ## Usage
 - Make up a long and secure master password that you can remember.
@@ -28,4 +28,4 @@ At some companies you need to change your password frequently. For this, use dif
 - etc
 
 ## What about this PIN code?
-Sometimes what you need is not a alphanumeric password, but a PIN code. The code given is a numerical hash of the password.
+Sometimes what you need is not a alphanumeric password, but a PIN code. The pin code created is deterministic exactly like the password.

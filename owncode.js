@@ -1,3 +1,6 @@
+var PW_LENGTH = 10;
+var PIN_LENGTH = 8;
+
 var user = document.getElementById("user");
 var domain = document.getElementById("domain");
 var master = document.getElementById("master");
@@ -5,29 +8,34 @@ var pw = document.getElementById("password");
 var copyBtn = document.getElementById("copybtn");
 var pin = document.getElementById("pin");
 
-var chunky = function(input, size) {
+user.value = default_username;
+
+var chunkIntoPieces = function(input, size) {
     input = input.split('');
-    var arrays = [];
+    var chunks = [];
     while (input.length > 0) {
-        arrays.push(input.splice(0, size).join(''));
+        chunks.push(input.splice(0, size).join(''));
     }
-    return arrays;
+    return chunks;
 };
 
-var textToPw = function(text) {
-    var a = chunky(md5(text), 2);
-    var b = a.map(function(i) {
-        return String.fromCharCode(parseInt(i, 16));
-    }).join('');
-    return btoa(b).replace(/[\W]/g, '');
+var hexToInt = function(hex){
+	return parseInt(hex, 16);	
+};
+
+var md5ToPw = function(text) {    
+    var as_decimals = chunkIntoPieces(text, 2).map(hexToInt);	
+	var weird_string = String.fromCharCode(...as_decimals);
+	
+    return window.btoa(weird_string).replace(/[\W]/g, '');
 };
 
 var updatePasswordField = function(event) {
     var combined = (user.value + domain.value + master.value + salt).toLowerCase();
     var md5code = md5(combined);
-    pw.value = textToPw(md5code).substr(0, 10);
-    pin.value = parseInt(md5code.substr(0,6), 16).toString().substr(0, 4);
-    console.log(pin.value);
+	
+    pw.value = md5ToPw(md5code).substring(0, PW_LENGTH);
+    pin.value = hexToInt(md5code.substring(0,13)).toString().slice(-PIN_LENGTH);
 };
 
 var copyToClip = function(event) {
